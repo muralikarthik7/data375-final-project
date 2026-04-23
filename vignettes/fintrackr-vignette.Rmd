@@ -1,0 +1,69 @@
+---
+title: "Using fintrackr for Personal Finance Analysis"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Using fintrackr for Personal Finance Analysis}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+library(fintrackr)
+library(ggplot2)
+```
+Introduction
+
+The fintrackr package provides tools for personal finance management,
+including budgeting, investment growth analysis, debt repayment projection,
+strategy comparison, and financial visualization.
+
+Example Data
+
+```{r}
+finance_data <- data.frame(
+  date = as.Date(c("2026-01-01", "2026-01-15", "2026-02-01", "2026-02-10")),
+  category = c("Salary", "Groceries", "Salary", "Rent"),
+  income = c(3000, 0, 3000, 0),
+  expense = c(0, 200, 0, 1200)
+)
+finance_data
+```
+Budget Summary
+
+```{r}
+budget_out <- budget_summary(finance_data, income, expense, category, date)
+budget_out$category_summary
+budget_out$totals
+budget_out$monthly_summary
+```
+This function helps users summarize their financial activity by category
+and by month, while also computing total income, total expenses, and
+net balance.
+
+Investment Growth
+
+```{r}
+invest_out <- calc_returns(principal = 1000, rate = 0.05, time = 5, compound_freq = 12)
+invest_out$future_value
+head(invest_out$growth_table)
+```
+This function computes compound investment growth over time and returns
+both the final future value and a table of values by period.
+
+Debt Projection
+
+```{r}
+debt_out <- debt_projection(balance = 5000, annual_rate = 0.18, monthly_payment = 200)
+head(debt_out)
+tail(debt_out)
+```
+This function creates an amortization-style debt repayment table and shows
+how the balance decreases over time until payoff.
+
+Financial Trends Plot
+
+```{r}
+plot_financial_trends(budget_out$monthly_summary, month, net)
+```
+This plotting function returns a ggplot object, allowing users to
+visualize financial trends and customize the plot further if needed.
