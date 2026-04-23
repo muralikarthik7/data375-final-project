@@ -11,6 +11,7 @@
 #'
 #' @return A list with category summary, totals, and monthly summary.
 #' @export
+#'
 budget_summary <- function(data, income_col, expense_col, category_col, date_col) {
 
   income_col <- rlang::ensym(income_col)

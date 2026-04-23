@@ -8,9 +8,6 @@ vignette: >
 ---
 
 ```{r setup, include = FALSE}
-library(devtools)
-load_all()
-library(ggplot2)
 library(fintrackr)
 library(ggplot2)
 ```
@@ -23,6 +20,7 @@ strategy comparison, and financial visualization.
 
 ## Example Data
 
+
 ```{r}
 finance_data <- data.frame(
   date = as.Date(c("2026-01-01", "2026-01-15", "2026-02-01", "2026-02-10")),
@@ -33,9 +31,21 @@ finance_data <- data.frame(
 
 finance_data
 ```
+
+Each row represents a single financial transaction.
+The `income` column records money received, while the `expense`
+column records money spent. For each transaction, only one of
+these values is typically non-zero.
+
+Categories may appear multiple times (e.g., "Salary") because
+transactions occur on different dates, allowing the data to track
+financial activity over time.
+
+
 ### Budget Summary
 
 ```{r}
+# finance_data is passed as 'data' argument
 budget_out <- budget_summary(finance_data, income, expense, category, date)
 
 budget_out$category_summary
@@ -111,7 +121,11 @@ plot_financial_trends(
 
 
 This plotting function returns a ggplot object, allowing users to
-visualize financial trends and customize the plot further if needed.
+visualize financial trends.
+
+The input data is typically the `monthly_summary` output from
+`budget_summary`, where `month` and `net` are column names
+used for the x and y axes.
 
 
 ## Conclusion
