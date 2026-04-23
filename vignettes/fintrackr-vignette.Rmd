@@ -121,11 +121,9 @@ plot_financial_trends(
 
 
 This plotting function returns a ggplot object, allowing users to
-visualize financial trends.
-
-The input data is typically the `monthly_summary` output from
-`budget_summary`, where `month` and `net` are column names
-used for the x and y axes.
+visualize financial trends. The input data is typically 
+the `monthly_summary` output from `budget_summary`, where
+`month` and `net` are column names used for the x and y axes.
 
 
 ## Conclusion
