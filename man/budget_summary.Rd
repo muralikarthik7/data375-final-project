@@ -2,25 +2,30 @@
 % Please edit documentation in R/budget_summary.R
 \name{budget_summary}
 \alias{budget_summary}
-\title{Summarize income and expenses by category}
+\title{Summarize financial data using net amounts}
 \usage{
-budget_summary(data, income_col, expense_col, category_col, date_col)
+budget_summary(data, amount_col, category_col, date_col, opening_balance = 0)
 }
 \arguments{
 \item{data}{A data frame containing financial records.}
 
-\item{income_col}{Name of the income column.}
-
-\item{expense_col}{Name of the expense column.}
+\item{amount_col}{Name of the column containing net amounts
+(positive = income, negative = expense).}
 
 \item{category_col}{Name of the category column.}
 
 \item{date_col}{Name of the date column.}
+
+\item{opening_balance}{Numeric value representing the starting balance
+(default is 0).}
 }
 \value{
-A list with category summary, totals, and monthly summary.
+A list with ledger, category summary, totals, and monthly summary.
 }
 \description{
-This function summarizes financial records and computes totals
-and trends over time.
+This function summarizes financial records using a single amount column,
+where positive values represent income and negative values represent
+expenses. It computes category-wise totals, overall totals, and monthly
+trends, and also tracks a running balance over time starting from a
+specified opening balance.
 }

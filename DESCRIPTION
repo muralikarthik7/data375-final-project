@@ -1,11 +1,19 @@
 Package: fintrackr
+Type: Package
 Title: Personal Finance Analysis Tools
 Version: 0.1.0
-Description: Tools for budgeting, investment analysis, debt planning, and financial visualization.
-Authors@R: person("Murali", "Ganji", email = "your_email@arizona.edu", role = c("aut", "cre"))
+Author: Murali Karthik Ganji, Deeksha Reddy, Wesley Bowers
+Maintainer: Murali Karthik Ganji <muralikarthik@arizona.edu>
+Description: We have created an R package that aims to support personal
+    finance analysis by providing tools for budgeting, investment growth,
+    debt repayment projection, and financial data visualization. Users can
+    summarize financial transactions, analyze trends over time, model
+    investment growth with regular contributions, and simulate debt
+    repayment schedules in a structured and user-friendly workflow.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
+Depends: R (>= 4.1.0)
 Imports:
     dplyr,
     ggplot2,
@@ -15,5 +23,5 @@ Suggests:
     knitr,
     rmarkdown
 VignetteBuilder: knitr
-Config/testthat/edition: 3
+NeedsCompilation: no
 RoxygenNote: 7.3.3

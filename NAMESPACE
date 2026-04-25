@@ -2,6 +2,6 @@
 
 export(budget_summary)
 export(calc_returns)
-export(compare_strategies)
 export(debt_projection)
 export(plot_financial_trends)
+importFrom(utils,tail)

@@ -2,9 +2,9 @@
 % Please edit documentation in R/calc_returns.R
 \name{calc_returns}
 \alias{calc_returns}
-\title{Calculate compound investment growth}
+\title{Calculate investment growth with periodic contributions}
 \usage{
-calc_returns(principal, rate, time, compound_freq = 1)
+calc_returns(principal, rate, time, compound_freq = 1, contribution = 0)
 }
 \arguments{
 \item{principal}{Initial investment amount.}
@@ -13,11 +13,14 @@ calc_returns(principal, rate, time, compound_freq = 1)
 
 \item{time}{Number of years.}
 
-\item{compound_freq}{Number of compounding periods per year. Default is 1.}
+\item{compound_freq}{Number of compounding periods per year (default = 1).}
+
+\item{contribution}{Amount added each period.}
 }
 \value{
-A list containing the future value and a growth table.
+A list containing the final investment value (future_value) and a data frame (growth_table) showing growth over time.
 }
 \description{
-Computes future value and a growth table for an investment.
+Computes future value and a growth table for an investment with
+regular contributions (SIP model).
 }

@@ -19,6 +19,5 @@ plot_financial_trends(data, x, y, group = NULL)
 A ggplot object.
 }
 \description{
-Creates a line plot for financial data and adds points so trends
-are easier to see.
+Creates a line plot with points to visualize financial trends over time.
 }

@@ -7,7 +7,7 @@
 #' @param annual_rate Annual interest rate as a decimal.
 #' @param monthly_payment Fixed monthly payment amount.
 #'
-#' @return A data frame showing payment progress over time.
+#' @return A data frame showing monthly payment breakdown including interest paid, principal paid, and remaining balance.
 #' @export
 debt_projection <- function(balance, annual_rate, monthly_payment) {
 

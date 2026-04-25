@@ -12,30 +12,43 @@ library(fintrackr)
 library(ggplot2)
 ```
 
+
 ## Introduction
 
 The fintrackr package provides tools for personal finance management,
-including budgeting, investment growth analysis, debt repayment projection,
-strategy comparison, and financial visualization.
+including budgeting, investment growth analysis, debt repayment projection, 
+and financial visualization.
 
 ## Example Data
 
 
 ```{r}
 finance_data <- data.frame(
-  date = as.Date(c("2026-01-01", "2026-01-15", "2026-02-01", "2026-02-10")),
-  category = c("Salary", "Groceries", "Salary", "Rent"),
-  income = c(3000, 0, 3000, 0),
-  expense = c(0, 200, 0, 1200)
+  date = as.Date(c(
+    "2026-01-01","2026-01-05","2026-01-10","2026-01-15","2026-01-20",
+    "2026-02-01","2026-02-03","2026-02-08","2026-02-12","2026-02-18",
+    "2026-03-01","2026-03-06","2026-03-10","2026-03-15","2026-03-22"
+  )),
+  category = c(
+    "Salary","Food","Transport","Groceries","Entertainment",
+    "Salary","Rent","Food","Transport","Shopping",
+    "Salary","Groceries","Food","Utilities","Entertainment"
+  ),
+  amount = c(
+    3000, -50, -30, -200, -100,
+    3000, -1200, -60, -40, -150,
+    3000, -250, -70, -180, -120
+  )
 )
 
 finance_data
 ```
 
-Each row represents a single financial transaction.
-The `income` column records money received, while the `expense`
-column records money spent. For each transaction, only one of
-these values is typically non-zero.
+Each row represents a single financial transaction. The amount column 
+stores both income and expenses: positive values represent income, 
+while negative values represent expenses. This unified format simplifies 
+analysis and reflects how financial data is commonly recorded in 
+real-world applications.
 
 Categories may appear multiple times (e.g., "Salary") because
 transactions occur on different dates, allowing the data to track
@@ -46,32 +59,34 @@ financial activity over time.
 
 ```{r}
 # finance_data is passed as 'data' argument
-budget_out <- budget_summary(finance_data, income, expense, category, date)
+# Setting opening_balance = 0 assumes the user starts from zero,
+# and all income and expenses update the balance over time.
+budget_out <- budget_summary(finance_data, amount, category, date, opening_balance = 0)
 
+head(budget_out$ledger)
+tail(budget_out$ledger)
 budget_out$category_summary
 budget_out$totals
 budget_out$monthly_summary
 ```
-This function helps users summarize their financial activity by category
-and by month, while also computing total income, total expenses, and
-net balance.
+This function summarizes financial activity using a single amount column, where positive values represent income and negative values represent expenses. It calculates category totals, overall totals, and monthly trends, while also maintaining a running balance from an opening balance of 0, helping users clearly track how their financial position changes over time.
 
 
 ### Investment Growth
 
 ```{r}
 invest_out <- calc_returns(
-  principal = 1000,
+  principal = 0,
   rate = 0.05,
   time = 5,
-  compound_freq = 12
+  compound_freq = 12,
+  contribution = 200
 )
 
 invest_out$future_value
 head(invest_out$growth_table)
 ```
-This function computes compound investment growth over time and returns
-both the final future value and a table of values by period.
+This function models investment growth with regular contributions (SIP). At each period, the investment earns interest and a fixed contribution is added, making it useful for simulating real-world long-term savings plans.
 
 
 ### Debt Projection
@@ -89,24 +104,6 @@ tail(debt_out)
 This function creates an amortization-style debt repayment table and shows
 how the balance decreases over time until payoff.
 
-### Strategy Comparison
-
-```{r}
-strategies <- data.frame(
-  strategy_name = c("Plan A", "Plan B"),
-  initial = c(1000, 1000),
-  rate = c(0.05, 0.07),
-  compound_freq = c(12, 12),
-  time = c(5, 5)
-)
-
-compare_strategies(strategies)
-```
-
-
-This function compares different financial strategies and returns
-their final values for easy comparison.
-
 
 
 ### Financial Trends Plot
@@ -120,10 +117,7 @@ plot_financial_trends(
 ```
 
 
-This plotting function returns a ggplot object, allowing users to
-visualize financial trends. The input data is typically 
-the `monthly_summary` output from `budget_summary`, where
-`month` and `net` are column names used for the x and y axes.
+This function returns a ggplot object to visualize financial trends over time. It uses the monthly_summary output from budget_summary to show how net balance changes across months, helping users identify patterns in income and spending.
 
 
 ## Conclusion

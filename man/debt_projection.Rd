@@ -14,7 +14,7 @@ debt_projection(balance, annual_rate, monthly_payment)
 \item{monthly_payment}{Fixed monthly payment amount.}
 }
 \value{
-A data frame showing payment progress over time.
+A data frame showing monthly payment breakdown including interest paid, principal paid, and remaining balance.
 }
 \description{
 Generates an amortization-style table for debt repayment using
